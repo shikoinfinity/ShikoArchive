@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شيكو أرشيف - المشاريع المؤرشفة</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-bg: #ffffff;
+            --primary-text: #000000;
+            --secondary-bg: #f0f0f0;
+            --accent-color: #333333;
+            --button-hover: #555555;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary-bg: #121212;
+            --primary-text: #ffffff;
+            --secondary-bg: #1e1e1e;
+            --accent-color: #bbbbbb;
+            --button-hover: #777777;
+            --shadow-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            flex-wrap: wrap;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container img {
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .logo-container h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+
+        .user-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--primary-text);
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--secondary-bg);
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-dropdown {
+            background: var(--primary-bg);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            padding: 0.5rem;
+            cursor: pointer;
+            color: var(--primary-text);
+        }
+
+        .language-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--primary-bg);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            display: none;
+            z-index: 1000;
+            min-width: 120px;
+        }
+
+        .language-options.show {
+            display: block;
+        }
+
+        .language-options a {
+            display: block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: var(--primary-text);
+            transition: background-color 0.3s;
+        }
+
+        .language-options a:hover {
+            background-color: var(--secondary-bg);
+        }
+
+        /* Main Content Styles */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px var(--shadow-color);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: var(--accent-color);
+        }
+
+        .project-card a {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .project-card a:hover {
+            background-color: var(--button-hover);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--secondary-bg);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 -2px 5px var(--shadow-color);
+            margin-top: 2rem;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../shikoinfinity.jpg" alt="شعار شيكو أرشيف">
+            <h1>شيكو أرشيف</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html">الرئيسية</a></li>
+                <li><a href="projects.html" class="active">المشاريع المؤرشفة</a></li>
+                <li><a href="aboutme.html">نبذة عني</a></li>
+            </ul>
+        </nav>
+        <div class="user-controls">
+            <button class="theme-toggle" id="theme-toggle">🌓</button>
+            <div class="language-selector">
+                <div class="language-dropdown" id="language-dropdown">
+                    العربية ▼
+                </div>
+                <div class="language-options" id="language-options">
+                    <a href="projects.html">العربية</a>
+                    <a href="../en/projects.html">English</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h2>المشاريع المؤرشفة</h2>
+            <p>استكشف مجموعة من المشاريع المؤرشفة</p>
+        </section>
+
+        <section class="projects-grid">
+            <div class="project-card">
+                <img src="../arabictranslationpreview.jpg" alt="معاينة مشروع الترجمة العربية">
+                <h3>مشروع الترجمة العربية</h3>
+                <p>حزمة نسيج لترجمة لعبة Geometry Dash إلى العربية باستخدام Texture Workshop.</p>
+                <a href="arabictranslationproject.html">عرض المشروع</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 شيكو أرشيف. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const languageDropdown = document.getElementById('language-dropdown');
+        const languageOptions = document.getElementById('language-options');
+
+        // Language dropdown functionality
+        languageDropdown.addEventListener('click', () => {
+            languageOptions.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-selector')) {
+                languageOptions.classList.remove('show');
+            }
+        });
+
+        // Dark mode toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        } else {
+            themeToggle.textContent = '🌙';
+        }
+        
+        // Theme toggle event listener
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            }
+        });
+    </script>
+</body>
+</html>
+

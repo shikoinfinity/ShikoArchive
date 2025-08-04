@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شيكو أرشيف - الرئيسية</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-bg: #ffffff;
+            --primary-text: #000000;
+            --secondary-bg: #f0f0f0;
+            --accent-color: #333333;
+            --button-hover: #555555;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --error-color: #e74c3c;
+            --success-color: #2ecc71;
+        }
+
+        .dark-mode {
+            --primary-bg: #121212;
+            --primary-text: #ffffff;
+            --secondary-bg: #1e1e1e;
+            --accent-color: #bbbbbb;
+            --button-hover: #777777;
+            --shadow-color: rgba(255, 255, 255, 0.1);
+            --error-color: #ff6b6b;
+            --success-color: #5be07d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            flex-wrap: wrap;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container img {
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .logo-container h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+
+        .user-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--primary-text);
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--secondary-bg);
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-dropdown {
+            background: var(--primary-bg);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            padding: 0.5rem;
+            cursor: pointer;
+            color: var(--primary-text);
+        }
+
+        .language-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--primary-bg);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            display: none;
+            z-index: 1000;
+            min-width: 120px;
+        }
+
+        .language-options.show {
+            display: block;
+        }
+
+        .language-options a {
+            display: block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: var(--primary-text);
+            transition: background-color 0.3s;
+        }
+
+        .language-options a:hover {
+            background-color: var(--secondary-bg);
+        }
+
+        /* Main Content Styles */
+        main {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .hero-section {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            margin-bottom: 2rem;
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .main-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .main-button {
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .main-button:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-5px);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--secondary-bg);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 -2px 5px var(--shadow-color);
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-buttons {
+                flex-direction: column;
+            }
+
+            .user-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../shikoinfinity.jpg" alt="شعار شيكو إنفينيتي">
+            <h1>شيكو أرشيف</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html" class="active">الرئيسية</a></li>
+                <li><a href="projects.html">المشاريع المؤرشفة</a></li>
+                <li><a href="aboutme.html">نبذة عني</a></li>
+            </ul>
+        </nav>
+        <div class="user-controls">
+            <button class="theme-toggle" id="theme-toggle">🌓</button>
+            <div class="language-selector">
+                <div class="language-dropdown" id="language-dropdown">
+                    العربية ▼
+                </div>
+                <div class="language-options" id="language-options">
+                    <a href="home.html">العربية</a>
+                    <a href="../en/home.html">English</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <img src="../shikoinfinity.jpg" alt="بانر شيكو إنفينيتي">
+            <h2>مرحباً بك في شيكو أرشيف</h2>
+            <p>هنا ستجد المشاريع المؤرشفة.</p>
+        </section>
+
+        <div class="main-buttons">
+            <a href="projects.html" class="main-button">المشاريع المؤرشفة</a>
+            <a href="aboutme.html" class="main-button">نبذة عني</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 شيكو أرشيف. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const languageDropdown = document.getElementById('language-dropdown');
+        const languageOptions = document.getElementById('language-options');
+
+        // Language dropdown functionality
+        languageDropdown.addEventListener('click', () => {
+            languageOptions.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-selector')) {
+                languageOptions.classList.remove('show');
+            }
+        });
+
+        // Dark mode toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        } else {
+            themeToggle.textContent = '🌙';
+        }
+        
+        // Theme toggle event listener
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            }
+        });
+    </script>
+</body>
+</html>
+

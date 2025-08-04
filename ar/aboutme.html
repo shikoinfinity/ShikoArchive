@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شيكو أرشيف - نبذة عني</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-bg: #ffffff;
+            --primary-text: #000000;
+            --secondary-bg: #f0f0f0;
+            --accent-color: #333333;
+            --button-hover: #555555;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary-bg: #121212;
+            --primary-text: #ffffff;
+            --secondary-bg: #1e1e1e;
+            --accent-color: #bbbbbb;
+            --button-hover: #777777;
+            --shadow-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px var(--shadow-color);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container img {
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .logo-container h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary-text);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+
+        .user-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--primary-text);
+        }
+
+        /* Main Content Styles */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .profile-card {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .profile-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid var(--primary-bg);
+        }
+
+        .profile-info {
+            margin-bottom: 2rem;
+        }
+
+        .profile-info h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .profile-info strong {
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            background-color: var(--button-hover);
+        }
+
+        .contact-section {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .contact-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+        }
+
+        .contact-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--secondary-bg);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 -2px 5px var(--shadow-color);
+            margin-top: 2rem;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .profile-card, .contact-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../shikoinfinity.jpg" alt="شعار شيكو أرشيف">
+            <h1>شيكو أرشيف</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html">الرئيسية</a></li>
+                <li><a href="projects.html">المشاريع المؤرشفة</a></li>
+                <li><a href="aboutme.html" class="active">نبذة عني</a></li>
+            </ul>
+        </nav>
+        <div class="user-controls">
+            <button class="theme-toggle" id="theme-toggle">🌓</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <div class="profile-card">
+                <img src="../shikoinfinity.jpg" alt="صورة ملف شيكو الشخصي">
+                <div class="profile-info">
+                    <h2>نبذة عني</h2>
+                    <p><strong>الاسم:</strong> شيكو</p>
+                    <p><strong>الجنس:</strong> ذكر</p>
+                    <p><strong>العمر:</strong> 16</p>
+                    <p><strong>أفضل:</strong> البرمجة والتكويد</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/shikoinfinity09" target="_blank" title="فيسبوك">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/shikoinfinity09" target="_blank" title="انستغرام">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h3>معلومات الاتصال</h3>
+                <div class="contact-info">
+                    <p><strong>البريد الإلكتروني:</strong> <a href="mailto:shicoahmed2009@outlook.com">shicoahmed2009@outlook.com</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 شيكو أرشيف. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // Dark mode toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        } else {
+            themeToggle.textContent = '🌙';
+        }
+        
+        // Theme toggle event listener
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            }
+        });
+    </script>
+</body>
+</html>
+
